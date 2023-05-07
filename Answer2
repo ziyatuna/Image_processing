@@ -1,0 +1,22 @@
+import image_dehazer
+import cv2
+
+HazeImg = cv2.imread('haze.png')
+airlightEstimation_windowSze = 35
+boundaryConstraint_windowSze = 9
+C0 = 1
+C1 = 500
+regularize_lambda = 0.3
+sigma = 0.1
+delta = 0.9
+showHazeTransmissionMap = False
+
+HazeCorrectedImg, HazeMap = image_dehazer.remove_haze(HazeImg, airlightEstimation_windowSze,
+                                                      boundaryConstraint_windowSze, C0, C1,
+                                                      regularize_lambda, sigma, delta,
+                                                      showHazeTransmissionMap)
+
+
+cv2.imshow('input image', HazeImg)
+cv2.imshow('enhanced_image', HazeCorrectedImg)
+cv2.waitKey(0)
