@@ -1,0 +1,25 @@
+from PIL import Image
+from PIL import ImageEnhance, ImageFilter
+
+image = Image.open('2.2.07.tiff')  
+image.show()  
+
+curr_bri = ImageEnhance.Brightness(image)
+new_bri = 1.2
+img_brightened = curr_bri.enhance(new_bri)
+
+curr_col = ImageEnhance.Color(img_brightened)
+new_col = 1.5
+img_colored = curr_col.enhance(new_col)
+
+curr_con = ImageEnhance.Contrast(img_colored)
+new_con = 1.5
+img_contrasted = curr_con.enhance(new_con)
+
+curr_sharp = ImageEnhance.Sharpness(img_contrasted)
+new_sharp = 1.3
+img_sharped = curr_sharp.enhance(new_sharp)
+
+filtered_img = img_sharped.filter(ImageFilter.GaussianBlur(radius=0.5))
+
+filtered_img.show()
